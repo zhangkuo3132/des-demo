@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhangk.desdemo.dao.DesDemoDao">
+
+    <resultMap type="com.zhangk.desdemo.entity.DesDemo" id="DesDemoMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="userName" column="user_name" javaType="DESType"/>
+        <result property="userPhone" column="user_phone" javaType="DESType"/>
+        <result property="userAddress" column="user_address" javaType="DESType"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="DesDemoMap">
+        select
+          id, user_name, user_phone, user_address
+        from des_demo
+        where id = #{id}
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into des_demo(user_name, user_phone, user_address)
+        values (#{userName, javaType=DESType}, #{userPhone, javaType=DESType}, #{userAddress, javaType=DESType})
+    </insert>
+</mapper>
+
